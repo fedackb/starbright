@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href='https://fonts.googleapis.com/css?family=Cantarell:400,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/flexbox.css" />
+		<title>StarBright - CS 496 Fall 2015 - Brett Fedack</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+{% if user %}
+		<script type="text/javascript" src="js/hammer.min.js"></script>
+	 	<script type="text/javascript" src="js/gl-matrix-min.js"></script>
+		<script type="text/javascript" src="js/conversions.js"></script>
+		<script type="text/javascript" src="js/stardata.js"></script>
+		<script type="text/javascript" src="js/gl.js"></script>
+		<script type="text/javascript" src="js/handlers.js"></script>
+		<script type="text/javascript" src="js/async.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+{% endif %}
+	</head>
+	<body>
+{% if user %}
+		<div id="screen">
+			<div id='search-results-page' class="page">
+				<button class="back noselect">Back</button>
+				<fieldset>
+					<legend class="noselect" >Best Stargazing Locations</legend>
+					<div id="search-results" class="noselect" >&nbsp;</div>
+				</fieldset>
+			</div>
+			<div id='view-results-page' class="page">
+				<button class="back noselect">Back</button>
+				<fieldset>
+					<legend class="noselect" >User Submissions</legend>
+					<div id="view-results" class="noselect" >&nbsp;</div>
+				</fieldset>
+			</div>
+			<div id='measure-page' class="page">
+				<canvas id="webgl"></canvas>
+				<button class="back noselect">Back</button>
+				<label id = "camera-label" class="noselect">&nbsp;</label>
+				<input id="mpas-control" type="range" min="12" max="21" step="0.01" />
+				<label id = "mpas-control-label" class="noselect">&nbsp;</label>
+			</div>
+{% endif %}
+			<div id="home-page" class="page">
+				<header>
+					<h1 class="noselect" >StarBright</h1>
+{% if user %}
+					<a id="logout" class="button" href={{ logout_url }}></a>
+{% endif %}
+				</header>
+{% if user %}
+				<fieldset>
+					<legend class="noselect" >Sky Quality Submission</legend>
+					<div class="flexbox flex-row flex-end">
+						<label class="input-label noselect flex-fit">Sky Brightness (mpas):</label>
+						<input id="mpas-input" class="flex-fit"type="number", min="12", max="21", step="0.01" value="16.5" />
+					</div>
+					<div class="flexbox flex-row">
+						<button id="measure" class="flex-expand noselect">Measure</button>
+						<button id="submit" class="flex-expand noselect">Submit</button>
+					</div>
+					<div class="flexbox">
+						<button id="view" class="flex-expand noselect">View Submissions</button>
+					</div>
+					<label id="sky-quality-feedback" class="feedback noselect"/>&nbsp</label>
+				</fieldset>
+				<fieldset>
+					<legend class="noselect" >Best Stargazing Locations</legend>
+					<div class="flexbox flex-row flex-end">
+						<label class="input-label noselect flex-fit">Search Distance (miles):</label>
+						<input id="search-distance-input" class="flex-fit"type="number", min="5", max="1000", step="5" value="10" />
+					</div>
+					<div class="flexbox flex-row">
+						<button id="search" class="flex-expand noselect">Search</button>
+					</div>
+					<label id="search-feedback" class="feedback noselect"/>&nbsp</label>
+				</fieldset>
+{% else %}
+				<fieldset>
+					<legend class="noselect" >Login</legend>
+					<div class="flexbox flex-row">
+						<a id="login" class="button flex-expand noselect" href={{ login_url }}>Google Account</a>
+					</div>
+				</fieldset>
+{% endif %}
+			</div>
+		</div>
+	</body>
+</html>

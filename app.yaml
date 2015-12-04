@@ -1,0 +1,23 @@
+application: cs496-f15-starbright
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest
+
+handlers:
+- url: /v1/.*
+  script: cloud-api.main.app
+- url: /assets
+  static_dir: mobile-web-app/assets
+- url: /css
+  static_dir: mobile-web-app/css
+- url: /js
+  static_dir: mobile-web-app/js
+- url: /.*
+  script: mobile-web-app.main.app
