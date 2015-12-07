@@ -43,7 +43,7 @@ class Location(ndb.Model):
         for location in location_list:
 
             # Get the list of sky brightness.
-            mpas_list = [key.get().mpas for key in location.samples]
+            mpas_list = [key.get().mpas for key in location.samples if key.get()]
             samples = len(mpas_list)
             if samples < 1:
                 continue
